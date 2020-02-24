@@ -55,12 +55,15 @@ body {
   /* now we need slightly move this box, so we use transform */
   /* translate(-50%,-50%) will shift element ITSELF not PARENT ELEMENT */
   transform: translate(-50%, -50%);
+  /* to center the button inside text-box we use text-align */
+  text-align: center;
 }
 .heading-primary {
   color: #fff;
   text-transform: uppercase;
   /* to stop shaking the h1 in animation we use backface-visibility */
   backface-visibility: hidden;
+  margin-bottom: 60px;
 }
 .heading-primary-main {
   display: block;
@@ -132,4 +135,31 @@ body {
     /* we want it to look like now so we neet translate(0) */
     transform: translate(0);
   }
+}
+/* :link - is a state of button selector */
+.btn:link,
+.btn:visited {
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 15px 40px;
+  display: inline-block;
+  border-radius: 100px;
+  /* easy way animation just transition */
+  /* makes button transition slower and nicer */
+  transition: all 0.2s;
+}
+.btn:hover {
+  transform: translateY(-3px);
+  /* adding the shadow */
+  /* 0 is ofset X direction;  10px is ofset Y direction ; 20px is a bluer   */
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+/* :active - when we click */
+.btn:active {
+  transform: translateY(-1px);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
+.btn-white {
+  background-color: #fff;
+  color: #777;
 }
