@@ -136,6 +136,25 @@ body {
     transform: translate(0);
   }
 }
+@keyframes moveInBottom {
+  /* we start with 0% - before animation starts */
+  /* the best solution for browser is to use opacity and transform */
+  /* browsers optimized for opacity and transform properties */
+  0% {
+    /* opacity :0 invisible at the beggining */
+    opacity: 0;
+    /* transform:translateX - becouse we wont to animate in X direction */
+    /* and I want it to be more on the left than of beggining that is why -100px */
+    transform: translateY(30px);
+  }
+
+  /* 100% when animation finish */
+  100% {
+    opacity: 1;
+    /* we want it to look like now so we neet translate(0) */
+    transform: translate(0);
+  }
+}
 /* :link - is a state of button selector */
 .btn:link,
 .btn:visited {
@@ -147,6 +166,8 @@ body {
   /* easy way animation just transition */
   /* makes button transition slower and nicer */
   transition: all 0.2s;
+  /* setting up position:relative for .btn::after */
+  position: relative;
 }
 .btn:hover {
   transform: translateY(-3px);
@@ -162,4 +183,39 @@ body {
 .btn-white {
   background-color: #fff;
   color: #777;
+}
+.btn::after {
+  /* content ALWAYS need to be specified in :after sudo element */
+  /* display ALWAYS need to be specified in :after sudo element */
+  /* we want this element to look exactly the same as the button  */
+  /* because sudo element is treated as the child of the button so it should be the same */
+  /* that is why we put height:100 and width:100% border-radius should be the same */
+  content: "";
+  display: inline-block;
+  height: 100%;
+  width: 100%;
+  border-radius: 100px;
+  /* we use position to put this button behind existing button  */
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  /* transition for :hover::after state  */
+  transition: all 0.4s;
+}
+.btn-white::after {
+  background-color: #fff;
+}
+/* it means ::after when we hover on btn */
+.btn:hover::after {
+  /* scale - will increase element in (n) size */
+  transform: scaleX(1.4) scaleY(1.6);
+  /*opacity:0 -fade it out - CREATES NICE EFFECT */
+  opacity: 0;
+}
+.btn-animated {
+  /* animate btn to come from the bottom  .75s is a delay*/
+  animation: moveInBottom 0.5s ease-out 0.75s;
+  /* backwards - automatically apply the styles of 0% before animation starts */
+  animation-fill-mode: backwards;
 }
